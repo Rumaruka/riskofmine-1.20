@@ -143,7 +143,7 @@ public class ItemsEvents {
         if (event.getSource().getEntity() instanceof Mob && event.getEntity() instanceof ServerPlayer player) {
 
 
-            Level world = player.level;
+            Level world = player.level();
             if (!world.isClientSide) {
 
                 for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
@@ -182,7 +182,7 @@ public class ItemsEvents {
          */
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
             LivingEntity livingEntity = event.getEntity();
-            Level world = livingEntity.level;
+            Level world = livingEntity.level();
 
             if (!world.isClientSide) {
 
@@ -207,7 +207,7 @@ public class ItemsEvents {
          Entity kill Player
          */
         if (event.getSource().getEntity() instanceof AmbientCreature livingEntity && event.getEntity() instanceof ServerPlayer player) {
-            Level world = player.level;
+            Level world = player.level();
             if (!world.isClientSide) {
                 if (event.getSource().isBypassInvul()) {
                     return;
@@ -265,7 +265,7 @@ public class ItemsEvents {
     public static void onEntityUpdate(LivingEvent.LivingTickEvent event) {
         Player player = ROMUtils.getPlayer();
         LivingEntity livingEntity = event.getEntity();
-        Level level = livingEntity.level;
+        Level level = livingEntity.level();
         if (!level.isClientSide) {
             if (player != null) {
 

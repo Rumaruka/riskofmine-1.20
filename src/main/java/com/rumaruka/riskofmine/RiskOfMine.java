@@ -6,6 +6,7 @@ import com.rumaruka.riskofmine.client.render.layer.LayerMonsterTooth;
 import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
+import com.rumaruka.riskofmine.common.config.ROMConfig;
 import com.rumaruka.riskofmine.init.ROMContainerTypes;
 import com.rumaruka.riskofmine.init.ROMEffects;
 import com.rumaruka.riskofmine.init.ROMParticles;
@@ -21,6 +22,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -30,6 +32,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.timeconqueror.timecore.api.TimeCoreAPI;
 import ru.timeconqueror.timecore.api.client.resource.location.TextureLocation;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 
@@ -87,10 +91,9 @@ public class RiskOfMine {
 
 
     private void enqueueIMC(InterModEnqueueEvent event) {
-        //FIXME
-//        for (SlotTypePreset preset : SlotTypePreset.values()) {
-//            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.GENERAL.sizeCurio.get()).build());
-//        }
+        for (SlotTypePreset preset : SlotTypePreset.values()) {
+            InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> preset.getMessageBuilder().size(ROMConfig.GENERAL.sizeCurio.get()).build());
+        }
 
 
     }

@@ -3,6 +3,7 @@ package com.rumaruka.riskofmine.client.render.layer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.rumaruka.riskofmine.init.ROMItems;
+import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -33,11 +34,10 @@ public class LayerMonsterTooth extends RenderLayer<AbstractClientPlayer, PlayerM
 
             }
         }
-        //FIXME
-//        if (CuriosApi.getCuriosHelper().findFirstCurio(playerEntity, ROMItems.MONSTER_TOOTH).isPresent()) {
-//            ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(playerEntity, ROMItems.MONSTER_TOOTH).get().stack();
-//            renderMonsterTooth(curioStack, matrixStack, pBuffer, pPackedLight, playerEntity, pTicks);
-//        }
+        if (CuriosApi.getCuriosHelper().findFirstCurio(playerEntity, ROMItems.MONSTER_TOOTH).isPresent()) {
+            ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(playerEntity, ROMItems.MONSTER_TOOTH).get().stack();
+            renderMonsterTooth(curioStack, matrixStack, pBuffer, pPackedLight, playerEntity, pTicks);
+        }
     }
 
     private void renderMonsterTooth(ItemStack itemStack, PoseStack matrixStack, MultiBufferSource pBuffer, int pPackedLight, AbstractClientPlayer playerEntity, float pTicks) {
@@ -70,7 +70,7 @@ public class LayerMonsterTooth extends RenderLayer<AbstractClientPlayer, PlayerM
         matrixStack.mulPose(Axis.XP.rotationDegrees(6.0F + f2 / 2.0F + f1));
         matrixStack.mulPose(Axis.ZP.rotationDegrees(f3 / 2.0F));
         matrixStack.mulPose(Axis.YP.rotationDegrees(180.0F - f3 / 2.0F));
-        Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, pPackedLight, OverlayTexture.NO_OVERLAY, matrixStack, pBuffer, Minecraft.getInstance().level,0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, pPackedLight, OverlayTexture.NO_OVERLAY, matrixStack, pBuffer, ROMUtils.getMc().level,0);
 
         matrixStack.popPose();
 

@@ -112,18 +112,18 @@ public class ROMUtils {
         return 0;
     }
 
-//    public static int countingCurio(Player player, Item item) {
-//
-//
-//        ItemStack itemStack = curiosItemStack(player, item);
-//        if (itemStack.getItem() == item) {
-//
-//            return itemStack.getCount();
-//
-//
-//        }
-//        return 0;
-//    }
+    public static int countingCurio(Player player, Item item) {
+
+
+        ItemStack itemStack = curiosItemStack(player, item);
+        if (itemStack.getItem() == item) {
+
+            return itemStack.getCount();
+
+
+        }
+        return 0;
+    }
 
     public static boolean checkInventory(Player player, ItemStack item) {
 
@@ -138,24 +138,22 @@ public class ROMUtils {
         return false;
     }
 
-//    public static ItemStack curiosItemStack(Player player, Item item) {
-//        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {
-//            return CuriosApi.getCuriosHelper().findFirstCurio(player, item).get().stack();
-//        } else {
-//            return ItemStack.EMPTY;
-//        }
-//    }
-//
-//    public static boolean checkCurios(Player player, ItemStack item) {
-//        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item.getItem()).isPresent()) {
-//            ItemStack curioStack = curiosItemStack(player, item.getItem());
-//            if (ItemStack.isSameItem(curioStack, item)) {
-//                return true;
-//            }
-//
-//        }
-//        return false;
-//    }
+    public static ItemStack curiosItemStack(Player player, Item item) {
+        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {
+            return CuriosApi.getCuriosHelper().findFirstCurio(player, item).get().stack();
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
+
+    public static boolean checkCurios(Player player, ItemStack item) {
+        if (CuriosApi.getCuriosHelper().findFirstCurio(player, item.getItem()).isPresent()) {
+            ItemStack curioStack = curiosItemStack(player, item.getItem());
+            return ItemStack.isSameItem(curioStack, item);
+
+        }
+        return false;
+    }
 
     private ExplosionDamageCalculator makeNewEDC(Entity entity) {
         return new EntityBasedExplosionDamageCalculator(entity);
