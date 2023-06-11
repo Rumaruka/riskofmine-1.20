@@ -1,0 +1,38 @@
+{
+  "riskofmine.block.open_chest": {
+    "sounds": [
+      "riskofmine:riskofmine.block.open_chest"
+    ]
+  },
+  "riskofmine.block.not_money": {
+    "sounds": [
+      "riskofmine:riskofmine.block.not_money"
+    ]
+  },
+
+  "riskofmine.ui.void_replace": {
+    "sounds": [
+      "riskofmine:riskofmine.ui.void_replace"
+    ]
+  },
+  "riskofmine.proc.mt_spawn": {
+    "sounds": [
+      "riskofmine:riskofmine.proc.mt_spawn"
+    ]
+  },
+  "riskofmine.proc.mt_impact": {
+    "sounds": [
+      "riskofmine:riskofmine.proc.mt_impact"
+    ]
+  },
+  "riskofmine.player.feather_1": {
+    "sounds": [
+      "riskofmine:riskofmine.player.feather_1"
+    ]
+  },
+  "riskofmine.player.level_up": {
+    "sounds": [
+      "riskofmine:riskofmine.player.level_up"
+    ]
+  }
+}

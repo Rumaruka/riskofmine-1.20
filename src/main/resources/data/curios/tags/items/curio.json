@@ -1,0 +1,53 @@
+{
+  "replace": "false",
+  "values": [
+    {
+      "id": "riskofmine:bustling_fungus",
+      "required": false
+    },
+    {
+      "id": "riskofmine:armor_piercing_rounds",
+      "required": false
+    },
+    {
+      "id": "riskofmine:monster_tooth",
+      "required": false
+    },
+    {
+      "id": "riskofmine:gasoline",
+      "required": false
+    },
+    {
+      "id":     "riskofmine:crowbar",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:energy_drink",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:chronobauble",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:stun_grenade",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:old_war_stealthkit",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:sticky_bomb",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:focus_crystal",
+      "required": false
+    },
+    {
+      "id":  "riskofmine:shaped_glass",
+      "required": false
+    }
+  ]
+}
