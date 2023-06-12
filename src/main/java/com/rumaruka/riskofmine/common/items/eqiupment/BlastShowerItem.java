@@ -87,7 +87,7 @@ public class BlastShowerItem extends EquipmentBase {
             Player playerEntity = Minecraft.getInstance().player;
             Projectile projectileEntity = (Projectile) event.getEntity();
 
-            if (playerEntity != null && playerEntity.level.isClientSide) {
+            if (playerEntity != null && playerEntity.level().isClientSide) {
                 projectileEntity.kill();
             }
         }

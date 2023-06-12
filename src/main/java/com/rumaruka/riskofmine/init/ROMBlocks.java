@@ -31,15 +31,15 @@ public class ROMBlocks {
 
     @AutoRegistrable.Init
     private static void register() {
-        REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ROMCreativeTabs.MAIN).get());
-        REGISTER.register("large_chest", LargeChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ROMCreativeTabs.MAIN).get());
-        REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ROMCreativeTabs.MAIN).get());
-        REGISTER.register("lunar_chest", LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ROMCreativeTabs.MAIN).get());
+        REGISTER.register("small_chest", SmallChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
+        REGISTER.register("large_chest", LargeChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
+        REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
+        REGISTER.register("lunar_chest", LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
         REGISTER.register("warbanner_block", WarbannerBlock::new).oneVarStateAndCubeAllModel();
 
 
-        REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ROMCreativeTabs.MAIN).get());
-        REGISTER.register("equipment_triple_barrel", EquipmentTripleBarrelBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(ROMCreativeTabs.MAIN).get());
+        REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
+        REGISTER.register("equipment_triple_barrel", EquipmentTripleBarrelBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
 
 
     }

@@ -44,9 +44,8 @@ public class BaseScreen extends AbstractContainerScreen<ChestInventory> implemen
 
     @Override
     protected void renderLabels(GuiGraphics matrixStack, int mouseX, int mouseY) {
-        matrixStack.drawString(font, (FormattedCharSequence) this.title, 8.0F, 6.0F, 4210752,false);
-
-        matrixStack.drawString(font, (FormattedCharSequence) this.playerInventoryTitle, 8.0F, (float) (this.imageHeight - 96 + 2), 4210752,false);
+        matrixStack.drawString(font, this.title.getString(), 8.0F, 6.0F, 4210752,false);
+        matrixStack.drawString(font,  this.playerInventoryTitle.getString(), 8.0F, (float) (this.imageHeight - 96 + 2), 4210752,false);
     }
 
     @Override
@@ -58,6 +57,6 @@ public class BaseScreen extends AbstractContainerScreen<ChestInventory> implemen
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-       poseStack.blit(null, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
+       poseStack.blit(INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
     }
 }

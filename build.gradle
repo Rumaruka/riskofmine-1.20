@@ -7,9 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-        classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
 
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
 
     }
 }
@@ -19,13 +17,11 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.jetbrains.kotlin.jvm' version '1.8.22'
-    // OPTIONAL Kotlin Serialization plugin
-    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.22'
+
 }
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'kotlin'
-apply plugin: 'com.github.johnrengelman.shadow'
+
+
 
 version = mod_version
 group = mod_group_id
@@ -201,10 +197,11 @@ dependencies {
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.1+1.20")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:5.2.0-beta.1+1.20:api")
 
+    implementation fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
 
     implementation 'thedarkcolour:kotlinforforge:4.3.0'
-    implementation 'ru.timeconqueror:TimeCore:1.20-3.8.0.0'
+    implementation fg.deobf("ru.timeconqueror:TimeCore:1.20-3.8.0.0")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 

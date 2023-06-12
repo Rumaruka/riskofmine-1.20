@@ -63,7 +63,7 @@ public class BustlingFungusItem extends BaseCollectablesItem {
     public void curioTick(SlotContext slotContext, ItemStack stack) {
         LivingEntity livingEntity = slotContext.entity();
         if (livingEntity instanceof Player) {
-            if (!livingEntity.level.isClientSide()) {
+            if (!livingEntity.level().isClientSide()) {
                 if (!MovingHandler.isMoving((ServerPlayer) livingEntity)) {
 
                     livingEntity.heal((stack.getCount() + 0.045f) / 20f);

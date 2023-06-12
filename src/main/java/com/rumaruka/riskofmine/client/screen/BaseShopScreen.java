@@ -42,9 +42,10 @@ public class BaseShopScreen extends AbstractContainerScreen<ChestShopInventory> 
 
     @Override
     protected void renderLabels(GuiGraphics matrixStack, int mouseX, int mouseY) {
-        this.font.draw(matrixStack, this.title, 8.0F, 6.0F, 4210752);
 
-        this.font.draw(matrixStack, this.playerInventoryTitle, 8.0F, (float) (this.imageHeight - 96 + 2), 4210752);
+         matrixStack.drawString(font, this.title.getString(), 8.0F, 6.0F, 4210752,false);
+
+        matrixStack.drawString(font, this.playerInventoryTitle.getString(), 8.0F, (float) (this.imageHeight - 96 + 2), 4210752,false);
     }
 
     @Override
@@ -56,6 +57,6 @@ public class BaseShopScreen extends AbstractContainerScreen<ChestShopInventory> 
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        blit(poseStack, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
+       poseStack.blit(INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
     }
 }

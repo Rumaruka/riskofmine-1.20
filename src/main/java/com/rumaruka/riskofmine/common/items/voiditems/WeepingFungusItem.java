@@ -43,14 +43,14 @@ public class WeepingFungusItem extends VoidItem {
             for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
                 ItemStack itemStack = player.getInventory().getItem(i);
                 if (itemStack.getItem() instanceof BustlingFungusItem) {
-                    slotContext.entity().level.playSound(null, slotContext.entity().getX(), slotContext.entity().getY(), slotContext.entity().getZ(), ROMSounds.UI_VOID_REPLACE_ITEM.get(), SoundSource.MASTER, 2.0F, 1.0F);
+                    slotContext.entity().level().playSound(null, slotContext.entity().getX(), slotContext.entity().getY(), slotContext.entity().getZ(), ROMSounds.UI_VOID_REPLACE_ITEM.get(), SoundSource.MASTER, 2.0F, 1.0F);
 
                     replaceItem(itemStack, stack);
                 }
             }
 
 
-            if (!slotContext.entity().level.isClientSide()) {
+            if (!slotContext.entity().level().isClientSide()) {
                 if (MovingHandler.isMoving(player)) {
                     player.heal((stack.getCount() + 0.045f) / 20f);
                 }

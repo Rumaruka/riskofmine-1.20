@@ -18,7 +18,7 @@ public class ROMDoubleEffect {
 
     public static void play(Player localPlayer, Player effectPlayer) {
         Level world = localPlayer.level();
-        world.playSound(null, new BlockPos((int) effectPlayer.getX(), (int) effectPlayer.getY(), (int) effectPlayer.getZ()), ROMSounds.ROM_PLAYER_FEATHER.get(), SoundSource.MASTER, 2, 2);
+        world.playSound(null, new BlockPos( effectPlayer.getBlockX(), effectPlayer.getBlockY(), effectPlayer.getBlockZ()), ROMSounds.ROM_PLAYER_FEATHER.get(), SoundSource.MASTER, 2, 2);
 
 
         for (int i = 0; i < 5; ++i) {

@@ -38,7 +38,7 @@ public class TentabaubleItem extends VoidItem {
             for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
                 ItemStack itemStack = player.getInventory().getItem(i);
                 if (itemStack.getItem() instanceof ChronobaubleItem) {
-                    slotContext.entity().level.playSound(null, slotContext.entity().getX(), slotContext.entity().getY(), slotContext.entity().getZ(), ROMSounds.UI_VOID_REPLACE_ITEM.get(), SoundSource.MASTER, 2.0F, 1.0F);
+                    slotContext.entity().level().playSound(null, slotContext.entity().getX(), slotContext.entity().getY(), slotContext.entity().getZ(), ROMSounds.UI_VOID_REPLACE_ITEM.get(), SoundSource.MASTER, 2.0F, 1.0F);
 
                     replaceItem(itemStack, stack);
                 }

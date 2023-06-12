@@ -95,7 +95,7 @@ public class HealthOrbEntity extends Entity {
         this.move(MoverType.SELF, this.getDeltaMovement());
         float f = 0.98F;
         if (this.onGround()) {
-            BlockPos pos = new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ());
+            BlockPos pos = getBlockPosBelowThatAffectsMyMovement();
             f = this.level().getBlockState(pos).getFriction(this.level(), pos, this) * 0.98F;
         }
 
@@ -113,11 +113,11 @@ public class HealthOrbEntity extends Entity {
 
     private void scanForEntities() {
         if (this.followingPlayer == null || this.followingPlayer.distanceToSqr(this) > 64.0D) {
-            this.followingPlayer = this.level.getNearestPlayer(this, 8.0D);
+            this.followingPlayer = this.level().getNearestPlayer(this, 8.0D);
         }
 
-        if (this.level instanceof ServerLevel) {
-            for (HealthOrbEntity experienceorb : this.level.getEntities(EntityTypeTest.forClass(HealthOrbEntity.class), this.getBoundingBox().inflate(0.5D), this::canMerge)) {
+        if (this.level() instanceof ServerLevel) {
+            for (HealthOrbEntity experienceorb : this.level().getEntities(EntityTypeTest.forClass(HealthOrbEntity.class), this.getBoundingBox().inflate(0.5D), this::canMerge)) {
                 this.merge(experienceorb);
             }
         }
@@ -178,10 +178,10 @@ public class HealthOrbEntity extends Entity {
      * Called when the entity is attacked.
      */
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (this.level.isClientSide || this.isRemoved()) return false; //Forge: Fixes MC-53850
+        if (this.level().isClientSide || this.isRemoved()) return false; //Forge: Fixes MC-53850
         if (this.isInvulnerableTo(pSource)) {
             return false;
-        } else if (this.level.isClientSide) {
+        } else if (this.level().isClientSide) {
             return true;
         } else {
             this.markHurt();
@@ -215,7 +215,7 @@ public class HealthOrbEntity extends Entity {
      * Called by a player entity when they collide with an entity
      */
     public void playerTouch(Player pEntity) {
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             if (pEntity.takeXpDelay == 0) {
                 if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new PlayerHealthEvent.PickupHealth(pEntity, this)))
                     return;
@@ -223,7 +223,7 @@ public class HealthOrbEntity extends Entity {
                 pEntity.take(this, 1);
 
                 pEntity.heal(ROMItems.MONSTER_TOOTH.getSizeStack());
-                pEntity.level.playSound(null, new BlockPos(pEntity.getX(),pEntity.getY(),pEntity.getZ()), ROMSounds.PROC_MT_IMPACT.get(), SoundSource.MASTER,2,2);
+                pEntity.level().playSound(null, new BlockPos(pEntity.getBlockX(),pEntity.getBlockY(),pEntity.getBlockZ()), ROMSounds.PROC_MT_IMPACT.get(), SoundSource.MASTER,2,2);
 
                 --this.count;
                 if (this.count == 0) {

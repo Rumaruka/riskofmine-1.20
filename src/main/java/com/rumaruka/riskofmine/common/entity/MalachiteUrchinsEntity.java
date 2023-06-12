@@ -97,8 +97,8 @@ public class MalachiteUrchinsEntity extends Entity {
         this.move(MoverType.SELF, this.getDeltaMovement());
         float f = 0.98F;
         if (this.onGround()) {
-            BlockPos pos = new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ());
-            f = this.level().getBlockState(pos).getFriction(this.level, pos, this) * 0.98F;
+            BlockPos pos = new BlockPos(this.getBlockX(), this.getBlockY() - 1, this.getBlockZ());
+            f = this.level().getBlockState(pos).getFriction(this.level(), pos, this) * 0.98F;
         }
 
         this.setDeltaMovement(this.getDeltaMovement().multiply((double) f, 0.98D, (double) f));

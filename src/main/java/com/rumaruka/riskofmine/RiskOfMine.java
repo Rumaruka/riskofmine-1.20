@@ -7,10 +7,7 @@ import com.rumaruka.riskofmine.client.screen.BaseScreen;
 import com.rumaruka.riskofmine.client.screen.BaseShopScreen;
 import com.rumaruka.riskofmine.client.screen.overlay.ROMOverlayRender;
 import com.rumaruka.riskofmine.common.config.ROMConfig;
-import com.rumaruka.riskofmine.init.ROMContainerTypes;
-import com.rumaruka.riskofmine.init.ROMEffects;
-import com.rumaruka.riskofmine.init.ROMParticles;
-import com.rumaruka.riskofmine.init.ROMSounds;
+import com.rumaruka.riskofmine.init.*;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -40,14 +37,12 @@ import static com.rumaruka.riskofmine.RiskOfMine.MODID;
 @Mod(MODID)
 
 public class RiskOfMine {
-    private static RiskOfMine instance;
     public static final String MODID = "riskofmine";
     public static final Logger logger = LogManager.getLogger(MODID);
 
     private static final ModList MOD_LIST = ModList.get();
 
     public RiskOfMine() {
-        instance = this;
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         TimeCoreAPI.setup(this);
 
@@ -67,7 +62,7 @@ public class RiskOfMine {
         ROMParticles.PARTICLES.register(eventBus);
         ROMEffects.EFFECTS.register(eventBus);
         ROMEffects.POTIONS.register(eventBus);
-
+        ROMCreativeTabs.setup();
         MinecraftForge.EVENT_BUS.register(this);
     }
 

@@ -1,11 +1,11 @@
 package com.rumaruka.riskofmine.common.events;
 
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
-import com.rumaruka.riskofmine.common.cap.Shields;
 import com.rumaruka.riskofmine.common.entity.misc.HealthOrbEntity;
 import com.rumaruka.riskofmine.common.entity.misc.StickyBombEntity;
-import com.rumaruka.riskofmine.init.*;
+import com.rumaruka.riskofmine.init.ROMBlocks;
+import com.rumaruka.riskofmine.init.ROMItems;
+import com.rumaruka.riskofmine.init.ROMParticles;
+import com.rumaruka.riskofmine.init.ROMSounds;
 import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
 import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
@@ -14,15 +14,12 @@ import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -37,11 +34,8 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotContext;
 
-import java.text.AttributedString;
 import java.util.UUID;
-
 
 
 @Mod.EventBusSubscriber
@@ -63,7 +57,7 @@ public class ItemsEvents {
 
                 if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS))) {
                     if ((event.getEntity() instanceof WitherBoss || event.getEntity() instanceof EnderDragon || !event.getEntity().canChangeDimensions())) {
-                        event.getEntity().hurt(DamageSource.MAGIC, ROMUtils.counting(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS)) * 2 - 1);
+                        event.getEntity().hurt(level.damageSources().magic(), ROMUtils.counting(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS)) * 2 - 1);
 
                     }
                 }
@@ -71,7 +65,7 @@ public class ItemsEvents {
                     if (event.getEntity() instanceof AmbientCreature) {
                         if (((AmbientCreature) event.getEntity()).getHealth() > (((AmbientCreature) event.getEntity()).getMaxHealth() * 90 / 100)) {
 
-                            event.getEntity().hurt(DamageSource.MAGIC, (float) (ROMUtils.counting(player, new ItemStack(ROMItems.CROWBAR)) * 1.00115d));
+                            event.getEntity().hurt(level.damageSources().magic(), (float) (ROMUtils.counting(player, new ItemStack(ROMItems.CROWBAR)) * 1.00115d));
                         }
                     }
                 }
@@ -87,7 +81,7 @@ public class ItemsEvents {
 
                     if (curioStack.getItem() == ROMItems.ARMOR_PIERCING_ROUNDS && event.getEntity() instanceof AmbientCreature) {
                         if (curioStack.getItem() == ROMItems.ARMOR_PIERCING_ROUNDS && (event.getEntity() instanceof WitherBoss || event.getEntity() instanceof EnderDragon || !event.getEntity().canChangeDimensions())) {
-                            event.getEntity().hurt(DamageSource.MAGIC, curioStack.getCount() * 2 - 1);
+                            event.getEntity().hurt(level.damageSources().magic(), curioStack.getCount() * 2 - 1);
                         }
                     }
                 }
@@ -96,7 +90,7 @@ public class ItemsEvents {
 
                     if (((AmbientCreature) event.getEntity()).getHealth() > (((AmbientCreature) event.getEntity()).getMaxHealth() * 90 / 100)) {
 
-                        event.getEntity().hurt(DamageSource.MAGIC, (float) (curioStack.getCount() * 1.00115d));
+                        event.getEntity().hurt(level.damageSources().magic(), (float) (curioStack.getCount() * 1.00115d));
                     }
                 }
 
@@ -189,14 +183,14 @@ public class ItemsEvents {
                 if (CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.MONSTER_TOOTH).isPresent()) {
                     ItemStack curiosStack = CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.MONSTER_TOOTH).get().stack();
                     world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, curiosStack.getCount()));
-                    world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundSource.MASTER, 2, 2);
+                    world.playSound(null, new BlockPos(player.getBlockX(), player.getBlockY(), player.getBlockZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundSource.MASTER, 2, 2);
                 }
 
                 for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
                     ItemStack itemStack = player.getInventory().getItem(i);
                     if (itemStack.getItem() == ROMItems.MONSTER_TOOTH) {
                         world.addFreshEntity(new HealthOrbEntity(world, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, itemStack.getCount()));
-                        world.playSound(null, new BlockPos(player.getX(), player.getY(), player.getZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundSource.MASTER, 2, 2);
+                        world.playSound(null, new BlockPos(player.getBlockX(), player.getBlockY(), player.getBlockZ()), ROMSounds.PROC_MT_SPAWN.get(), SoundSource.MASTER, 2, 2);
 
                     }
                 }
@@ -209,7 +203,7 @@ public class ItemsEvents {
         if (event.getSource().getEntity() instanceof AmbientCreature livingEntity && event.getEntity() instanceof ServerPlayer player) {
             Level world = player.level();
             if (!world.isClientSide) {
-                if (event.getSource().isBypassInvul()) {
+                if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
                     return;
                 } else {
                     for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
@@ -274,7 +268,7 @@ public class ItemsEvents {
                         float distance = player.distanceTo(livingEntity);
 
                         if (distance <= 3.5) {
-                            livingEntity.hurt(DamageSource.MAGIC, ROMMathFormula.powerIncreasing(ROMUtils.counting(player, new ItemStack(ROMItems.FOCUS_CRYSTAL)), 5.0f, 5));
+                            livingEntity.hurt(level.damageSources().magic(), ROMMathFormula.powerIncreasing(ROMUtils.counting(player, new ItemStack(ROMItems.FOCUS_CRYSTAL)), 5.0f, 5));
                             ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get());
                         }
 
@@ -290,13 +284,12 @@ public class ItemsEvents {
                         float distance = player.distanceTo(livingEntity);
 
                         if (distance <= 3.5) {
-                            livingEntity.hurt(DamageSource.MAGIC, curioStack.getCount());
+                            livingEntity.hurt(level.damageSources().magic(), curioStack.getCount());
                             ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get(), 20);
                         }
                     }
 
                 }
-
 
 
             }
@@ -317,8 +310,6 @@ public class ItemsEvents {
             }
         }
     }
-
-
 
 
 }
