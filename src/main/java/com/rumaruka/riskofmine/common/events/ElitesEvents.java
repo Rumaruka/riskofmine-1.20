@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-
+@Mod.EventBusSubscriber
 public class ElitesEvents {
 
     @SubscribeEvent

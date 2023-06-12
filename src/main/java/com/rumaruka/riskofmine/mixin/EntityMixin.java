@@ -15,8 +15,9 @@ public abstract class EntityMixin implements IOverloading {
     @Shadow
     public abstract int getId();
 
-    @Shadow
-    public Level level;
+
+    @Shadow public abstract Level level();
+
     private boolean isOverloading;
 
     @Override
@@ -27,7 +28,7 @@ public abstract class EntityMixin implements IOverloading {
 
     @Override
     public void setOverloading(boolean isOver) {
-        if (isOver != isOverloading && !level.isClientSide()) {
+        if (isOver != isOverloading && !this.level().isClientSide()) {
             ROMNetwork.network.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> (Entity) (Object) this), new OverloadingPacket(this.getId(), isOver));
 
         }
