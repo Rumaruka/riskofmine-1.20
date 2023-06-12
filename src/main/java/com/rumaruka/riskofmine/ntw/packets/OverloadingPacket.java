@@ -2,7 +2,6 @@ package com.rumaruka.riskofmine.ntw.packets;
 
 import com.rumaruka.riskofmine.api.entity.IOverloading;
 import com.rumaruka.riskofmine.utils.ROMUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkEvent;

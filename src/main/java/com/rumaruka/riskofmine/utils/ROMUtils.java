@@ -2,6 +2,7 @@ package com.rumaruka.riskofmine.utils;
 
 import com.rumaruka.riskofmine.api.entity.IOverloading;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraftforge.common.MinecraftForge;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -38,6 +40,9 @@ public class ROMUtils {
 
     public static Level getLvL() {
         return mc.level;
+    }
+    public static LevelRenderer getRender() {
+        return mc.levelRenderer;
     }
 
     public static Player getPlayer() {

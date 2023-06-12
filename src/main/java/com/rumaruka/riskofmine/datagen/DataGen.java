@@ -14,7 +14,7 @@ public class DataGen {
         DataGenerator dataGenerator = event.getGenerator();
         PackOutput packOutput = dataGenerator.getPackOutput();
         if (event.includeServer()) {
-          //  dataGenerator.addProvider(event.includeServer(), new ROMLootTableProvider(packOutput));
+            dataGenerator.addProvider(event.includeServer(), new ROMLootTableProvider(packOutput));
         }
     }
 }

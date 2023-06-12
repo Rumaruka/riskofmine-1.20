@@ -57,6 +57,6 @@ public class BaseScreen extends AbstractContainerScreen<ChestInventory> implemen
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-       poseStack.blit(INVENTORY_LOCATION, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
+       poseStack.blit(this.chestType.guiTexture, x, y, 0, 0, this.imageWidth, this.imageHeight, this.textureXSize, this.textureYSize);
     }
 }

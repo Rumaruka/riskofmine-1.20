@@ -21,7 +21,5 @@ public class OverloadingEvent {
             ROMNetwork.network.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) entity), new OverloadingPacket(target.getId(), true));
 
         }
-
-
     }
 }
