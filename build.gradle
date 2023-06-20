@@ -4,10 +4,12 @@ buildscript {
             name = 'sponge'
             url = 'https://repo.spongepowered.org/maven'
         }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url = 'https://maven.minecraftforge.net' }
     }
     dependencies {
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.+"
         classpath 'org.spongepowered:mixingradle:0.7.+'
-
 
     }
 }
@@ -19,6 +21,7 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 
 }
+apply plugin: "com.matthewprenger.cursegradle"
 apply plugin: 'org.spongepowered.mixin'
 
 
@@ -29,7 +32,15 @@ group = mod_group_id
 base {
     archivesName = mod_id
 }
-
+ext.configFile = file("build.txt")
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse(prop)
+    project.ext.hasConfig = { key ->
+        return config.isSet(key);
+    }
+}
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -157,6 +168,7 @@ minecraft {
                     source sourceSets.main
                 }
             }
+
         }
     }
 }
@@ -168,6 +180,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     mavenLocal()
+    
     maven {
         name = 'Kotlin for Forge'
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
@@ -243,7 +256,8 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : mod_authors,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "riskofmine.mixins.json"
         ])
     }
 }
@@ -270,3 +284,102 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+curseforge {
+    apiKey = System.env.CF != null ? System.env.CF : "NONE"
+    project {
+        id = config.cf_project
+        changelogType = 'html'
+        changelog = ""
+        releaseType = config.release_type
+        addGameVersion config.mc_version
+        addGameVersion "Forge"
+        mainArtifact(jar) {
+            displayName = "[${config.mod_name} - ${config.mc_version}] - ${mod_version}"
+        }
+
+        def reqDeps = new ArrayList()
+        def optDeps = new ArrayList()
+        def incompat = new ArrayList()
+        def embLibs = new ArrayList()
+
+        def mods = config.required_mods.split(";")
+        if (mods.length > 0 && (mods.length > 1 || !mods[0].isEmpty()))
+            for (final def one in mods) {
+                if (one.isBlank()) continue
+                if (one.startsWith("@")) {
+                    def pars = one.substring(1).split(":", 2)
+                    if (pars[0].equalsIgnoreCase("c")) {
+                        reqDeps.add pars[1].trim()
+                    }
+                } else
+                    reqDeps.add one.trim()
+            }
+
+        mods = config.optional_mods.split(";")
+        if (mods.length > 0 && (mods.length > 1 || !mods[0].isEmpty()))
+            for (final def one in mods) {
+                if (one.isBlank()) continue
+                if (one.startsWith("@")) {
+                    def pars = one.substring(1).split(":", 2)
+                    if (pars[0].equalsIgnoreCase("c")) {
+                        optDeps.add pars[1].trim()
+                    }
+                } else
+                    optDeps.add one.trim()
+            }
+
+        mods = config.incompatible_mods.split(";")
+        if (mods.length > 0 && (mods.length > 1 || !mods[0].isEmpty()))
+            for (final def one in mods) {
+                if (one.isBlank()) continue
+                if (one.startsWith("@")) {
+                    def pars = one.substring(1).split(":", 2)
+                    if (pars[0].equalsIgnoreCase("c")) {
+                        incompat.add pars[1].trim()
+                    }
+                } else
+                    incompat.add one.trim()
+            }
+
+        mods = config.embedded_mods.split(";")
+        if (mods.length > 0 && (mods.length > 1 || !mods[0].isEmpty()))
+            for (final def one in mods) {
+                if (one.isBlank()) continue
+                if (one.startsWith("@")) {
+                    def pars = one.substring(1).split(":", 2)
+                    if (pars[0].equalsIgnoreCase("c")) {
+                        embLibs.add pars[1].trim()
+                    }
+                } else
+                    embLibs.add one.trim()
+            }
+
+        if (reqDeps.size() > 0 || optDeps.size() > 0 || incompat.size() > 0 || embLibs.size() > 0) {
+            relations {
+                reqDeps.each { dep ->
+                    requiredDependency dep
+                }
+                optDeps.each { dep ->
+                    optionalDependency dep
+                }
+                incompat.each { dep ->
+                    incompatible dep
+                }
+                embLibs.each { dep ->
+                    embeddedLibrary dep
+                }
+            }
+        }
+    }
+}
+tasks.register('buildAndUploadMod') {
+    group = "upload"
+    dependsOn "curseforge${config.cf_project}"
+
+    doLast {
+        println "Upload complete."
+    }
+}
+
+import net.minecraftforge.gradle.common.tasks.SignJar

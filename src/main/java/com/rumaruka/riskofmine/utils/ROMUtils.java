@@ -4,7 +4,6 @@ import com.rumaruka.riskofmine.api.entity.IOverloading;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -16,8 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraftforge.common.MinecraftForge;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ public class ROMUtils {
 
     private static final Minecraft mc = Minecraft.getInstance();
     public static int durOld;
-    public static int valueShields=5;
+    public static int valueShields = 5;
 
 
     public static Minecraft getMc() {
@@ -41,6 +38,7 @@ public class ROMUtils {
     public static Level getLvL() {
         return mc.level;
     }
+
     public static LevelRenderer getRender() {
         return mc.levelRenderer;
     }
@@ -53,11 +51,9 @@ public class ROMUtils {
         return valueShields;
     }
 
-    public static int getShieldShapedGlass(){
+    public static int getShieldShapedGlass() {
         return 16;
     }
-
-
 
 
     public static int getDurOld() {
@@ -82,9 +78,9 @@ public class ROMUtils {
 
     }
 
-    public static boolean isGiveDamage(LivingEntity entity){
+    public static boolean isGiveDamage(LivingEntity entity) {
         float health = Math.min(entity.getHealth(), entity.getMaxHealth());
-        return health<entity.getMaxHealth();
+        return health < entity.getMaxHealth();
     }
 
 
@@ -160,6 +156,7 @@ public class ROMUtils {
         return false;
     }
 
+    @Deprecated
     private ExplosionDamageCalculator makeNewEDC(Entity entity) {
         return new EntityBasedExplosionDamageCalculator(entity);
     }

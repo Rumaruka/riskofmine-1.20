@@ -42,7 +42,24 @@ public abstract class LocalPlayerMixin {
             }
             jumpedLastTick = player.input.jumping;
         }
+        if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.HOPOO_FEATHER))) {
+            if (player.onGround() || player.onClimbable()) {
+                jumpCount = ROMUtils.countingCurio(player, ROMItems.HOPOO_FEATHER);
 
+            } else if (!jumpedLastTick && jumpCount > 0 && player.getDeltaMovement().y < 0) {
+                if (player.input.jumping && !player.getAbilities().flying) {
+                    if (canJump(player)) {
+                        --jumpCount;
+                        player.jumpFromGround();
+                        ROMDoubleEffect.play(player);
+                        ROMNetwork.getInstance().sendToServer(new DoubleJumpPacket());
+
+
+                    }
+                }
+            }
+            jumpedLastTick = player.input.jumping;
+        }
     }
 
 

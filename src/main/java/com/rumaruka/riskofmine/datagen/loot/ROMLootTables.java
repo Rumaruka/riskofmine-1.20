@@ -13,7 +13,7 @@ public class ROMLootTables {
     private static final Set<ResourceLocation> LOCATIONS = Sets.newHashSet();
     private static final Set<ResourceLocation> IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
 
-    public static final ResourceLocation SMALL_CHEST = register("chests/small_chest");
+    public static final ResourceLocation SMALL_CHEST = register("chests/overworld/small_chest");
     public static final ResourceLocation LARGE_CHEST = register("chests/large_chest");
     public static final ResourceLocation LEGENDARY_CHEST = register("chests/legendary_chest");
     public static final ResourceLocation LUNAR_CHEST = register("chests/lunar_chest");

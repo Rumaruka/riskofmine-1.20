@@ -49,5 +49,11 @@
       "id":  "riskofmine:shaped_glass",
       "required": false
     }
+  ,
+    {
+      "id":  "riskofmine:hopoo_feather",
+      "required": false
+    }
   ]
 }
+

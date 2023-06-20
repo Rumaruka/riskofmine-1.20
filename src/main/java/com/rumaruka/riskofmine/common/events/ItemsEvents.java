@@ -15,7 +15,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -263,7 +262,7 @@ public class ItemsEvents {
         if (!level.isClientSide) {
             if (player != null) {
 
-                if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.FOCUS_CRYSTAL))) {
+                if (ROMUtils.checkInventory(player, ROMItems.FOCUS_CRYSTAL.getDefaultInstance())) {
                     if (livingEntity instanceof Mob) {
                         float distance = player.distanceTo(livingEntity);
 
@@ -276,16 +275,28 @@ public class ItemsEvents {
                     }
                 }
 
-
                 if (CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.FOCUS_CRYSTAL).isPresent()) {
                     ItemStack curioStack = CuriosApi.getCuriosHelper().findFirstCurio(player, ROMItems.FOCUS_CRYSTAL).get().stack();
-                    ;
                     if (livingEntity instanceof Mob) {
                         float distance = player.distanceTo(livingEntity);
 
                         if (distance <= 3.5) {
                             livingEntity.hurt(level.damageSources().magic(), curioStack.getCount());
                             ROMUtils.getMc().particleEngine.createTrackingEmitter(livingEntity, ROMParticles.FOCUS_CRYSTAL.get(), 20);
+                        }
+                    }
+
+
+                    if (ROMUtils.checkInventory(player, ROMItems.POWER_ELIXIR.getDefaultInstance())) {
+                        if (player.getHealth() < 2) {
+                            player.heal(player.getHealth());
+                            ROMUtils.replaceItem(ROMItems.POWER_ELIXIR.getDefaultInstance(), ROMItems.EMPTY_ELIXIR.getDefaultInstance());
+                        }
+                    }
+                    if (ROMUtils.checkCurios(player, ROMItems.POWER_ELIXIR.getDefaultInstance())) {
+                        if (player.getHealth() < 3) {
+                            player.heal(player.getHealth());
+                            ROMUtils.replaceItem(ROMItems.POWER_ELIXIR.getDefaultInstance(), ROMItems.EMPTY_ELIXIR.getDefaultInstance());
                         }
                     }
 
@@ -303,6 +314,12 @@ public class ItemsEvents {
         LivingEntity entity = event.getEntity();
         if (entity instanceof Player player) {
             if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.HOPOO_FEATHER))) {
+
+                ROMDoubleEffect.play(player);
+
+
+            }
+            if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.HOPOO_FEATHER))) {
 
                 ROMDoubleEffect.play(player);
 
