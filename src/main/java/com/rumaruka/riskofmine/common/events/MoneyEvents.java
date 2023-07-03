@@ -25,7 +25,7 @@ public class MoneyEvents {
                 }
             }
         }
-        if (event.getSource().getEntity() instanceof AmbientCreature livingEntity && event.getEntity() instanceof ServerPlayer player) {
+        if (event.getSource().getEntity() instanceof AmbientCreature  && event.getEntity() instanceof ServerPlayer player) {
             Level world = player.level();
             Money money = Money.of(player);
             if (!world.isClientSide) {

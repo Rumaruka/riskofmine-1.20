@@ -21,7 +21,7 @@ public class LunarEvents {
     @SubscribeEvent
     public static void onEntityDeath(LivingDeathEvent event) {
 
-        if (event.getSource().getEntity() instanceof ServerPlayer player) {
+        if (event.getSource().getEntity() instanceof ServerPlayer) {
             LivingEntity livingEntity = event.getEntity();
             Level level = livingEntity.level();
 
@@ -37,7 +37,7 @@ public class LunarEvents {
             }
 
         }
-        if (event.getSource().getEntity() instanceof AmbientCreature livingEntity && event.getEntity() instanceof ServerPlayer player) {
+        if (event.getSource().getEntity() instanceof AmbientCreature  && event.getEntity() instanceof ServerPlayer player) {
             Level world = player.level();
             Lunar lunar = Lunar.of(player);
             if (!world.isClientSide) {

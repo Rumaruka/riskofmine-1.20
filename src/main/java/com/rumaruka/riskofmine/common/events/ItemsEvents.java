@@ -74,7 +74,7 @@ public class ItemsEvents {
                         event.getEntity().setRemainingFireTicks(ROMUtils.counting(player, ROMItems.GASOLINE.getDefaultInstance()) * 20);
                     }
                 }
-                if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.ARMOR_PIERCING_ROUNDS))) {
+                if (ROMUtils.checkCurios(player, ROMItems.ARMOR_PIERCING_ROUNDS.getDefaultInstance())) {
 
 
                     if (event.getEntity() instanceof AmbientCreature) {
@@ -83,7 +83,7 @@ public class ItemsEvents {
                         }
                     }
                 }
-                if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.CROWBAR))) {
+                if (ROMUtils.checkCurios(player, ROMItems.CROWBAR.getDefaultInstance())) {
 
 
                     if (event.getEntity().getHealth() > (event.getEntity().getMaxHealth() * 90 / 100)) {
@@ -93,7 +93,7 @@ public class ItemsEvents {
                 }
 
             }
-            if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.GASOLINE))) {
+            if (ROMUtils.checkCurios(player, ROMItems.GASOLINE.getDefaultInstance())) {
 
 
                 if (event.getEntity() instanceof AmbientCreature) {
@@ -101,11 +101,11 @@ public class ItemsEvents {
                 }
 
             }
-            if (ROMUtils.checkInventory(player, new ItemStack(ROMItems.STICKY_BOMB))) {
+            if (ROMUtils.checkInventory(player,ROMItems.STICKY_BOMB.getDefaultInstance())) {
                 StickyBombEntity entityStickyBomb = new StickyBombEntity(level, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, event.getEntity());
                 level.addFreshEntity(entityStickyBomb);
             }
-            if (ROMUtils.checkCurios(player, new ItemStack(ROMItems.STICKY_BOMB))) {
+            if (ROMUtils.checkCurios(player, ROMItems.STICKY_BOMB.getDefaultInstance())) {
                 StickyBombEntity entityStickyBomb = new StickyBombEntity(level, livingEntity.getX() + 0.5d, livingEntity.getY() + 0.5d, livingEntity.getZ() + 0.5d, player, event.getEntity());
                 level.addFreshEntity(entityStickyBomb);
 
@@ -118,10 +118,12 @@ public class ItemsEvents {
     @SubscribeEvent
     public static void onPlayerLevelUp(PlayerXpEvent.LevelChange event) {
         Player entity = event.getEntity();
-        if (ROMUtils.checkInventory(entity, new ItemStack(ROMItems.WARBANNER))) {
+        if (ROMUtils.checkInventory(entity, ROMItems.WARBANNER.getDefaultInstance())) {
             entity.level().setBlockAndUpdate(entity.blockPosition(), ROMBlocks.WARBANNER_BLOCK.defaultBlockState());
         }
-
+        if (ROMUtils.checkCurios(entity, ROMItems.WARBANNER.getDefaultInstance())) {
+            entity.level().setBlockAndUpdate(entity.blockPosition(), ROMBlocks.WARBANNER_BLOCK.defaultBlockState());
+        }
     }
 
 
@@ -183,10 +185,11 @@ public class ItemsEvents {
         /*
          Entity kill Player
          */
-        if (event.getSource().getEntity() instanceof AmbientCreature livingEntity && event.getEntity() instanceof ServerPlayer player) {
+        if (event.getSource().getEntity() instanceof AmbientCreature  && event.getEntity() instanceof ServerPlayer player) {
             Level world = player.level();
             if (!world.isClientSide) {
                 if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+                    return;
                 } else {
 
                     ItemStack dio_best_friend = ROMItems.DIO_BEST_FRIEND.getDefaultInstance();

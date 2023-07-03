@@ -1,6 +1,8 @@
 package com.rumaruka.riskofmine.utils;
 
+import com.rumaruka.riskofmine.api.Types;
 import com.rumaruka.riskofmine.api.entity.IOverloading;
+import com.rumaruka.riskofmine.common.items.BaseCollectablesItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.network.chat.Component;
@@ -129,6 +131,7 @@ public class ROMUtils {
     public static boolean checkInventory(Player player, ItemStack item) {
 
         Inventory inventory = player.getInventory();
+
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack itemStack = inventory.getItem(i);
             if (ItemStack.isSameItem(itemStack, item)) {
@@ -139,6 +142,54 @@ public class ROMUtils {
         return false;
     }
 
+    public static boolean isCommon(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.COMMON) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isUnCommon(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.UNCOMMON) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isBossItem(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.BOSS) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isCommon(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.COMMON) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
     public static ItemStack curiosItemStack(Player player, Item item) {
         if (CuriosApi.getCuriosHelper().findFirstCurio(player, item).isPresent()) {
             return CuriosApi.getCuriosHelper().findFirstCurio(player, item).get().stack();
@@ -166,9 +217,5 @@ public class ROMUtils {
         scrap.shrink(-1);
     }
 
-
-    public static int getCountInItem(Item item) {
-        return new ItemStack(item).getCount();
-    }
 
 }

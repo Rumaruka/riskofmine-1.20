@@ -1,5 +1,6 @@
 package com.rumaruka.riskofmine.init;
 
+import com.rumaruka.riskofmine.common.blocks.ScrapperBlock;
 import com.rumaruka.riskofmine.common.blocks.WarbannerBlock;
 import com.rumaruka.riskofmine.common.blocks.chest.LargeChestBlock;
 import com.rumaruka.riskofmine.common.blocks.chest.LegendaryChestBlock;
@@ -24,6 +25,7 @@ public class ROMBlocks {
     public static MultiShopBlock MULTI_SHOP = promise();
 
     public static WarbannerBlock WARBANNER_BLOCK = promise();
+    public static ScrapperBlock SCRAPPER = promise();
     public static EquipmentTripleBarrelBlock EQUIPMENT_TRIPLE_BARREL = promise();
 
     @AutoRegistrable
@@ -36,6 +38,7 @@ public class ROMBlocks {
         REGISTER.register("legendary_chest", LegendaryChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
         REGISTER.register("lunar_chest", LunarChestBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
         REGISTER.register("warbanner_block", WarbannerBlock::new).oneVarStateAndCubeAllModel();
+        REGISTER.register("scrapper", ScrapperBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());
 
 
         REGISTER.register("multi_shop", MultiShopBlock::new).oneVarStateAndCubeAllModel().defaultBlockItem(ROMCreativeTabs.tabROM.getKey());

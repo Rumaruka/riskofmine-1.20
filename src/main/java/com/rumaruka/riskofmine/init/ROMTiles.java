@@ -24,7 +24,7 @@ public class ROMTiles {
     public static BlockEntityType<LunarChestTE> LUNAR_CHEST = promise();
     public static BlockEntityType<MultiShopTE> MULTI_SHOP = promise();
     public static BlockEntityType<EquipmentTripleBarrelTE> EQUIPMENT_TRIPLE_BARREL = promise();
-    public static BlockEntityType<WarbannerTE>WARBANNER_BLOCK =promise();
+    public static BlockEntityType<WarbannerTE> WARBANNER_BLOCK = promise();
 
 
     private static class Init {
