@@ -10,6 +10,7 @@ import com.rumaruka.riskofmine.common.items.legendary.DioBestFriendItem;
 import com.rumaruka.riskofmine.common.items.lunar.BeadsOfFealtyItem;
 import com.rumaruka.riskofmine.common.items.lunar.ShapedGlassItem;
 import com.rumaruka.riskofmine.common.items.scrap.CommonItemScrapItem;
+import com.rumaruka.riskofmine.common.items.scrap.UnCommonItemScrapItem;
 import com.rumaruka.riskofmine.common.items.uncommon.ChronobaubleItem;
 import com.rumaruka.riskofmine.common.items.uncommon.HopooFeatherItem;
 import com.rumaruka.riskofmine.common.items.uncommon.InfusionItem;
@@ -58,7 +59,7 @@ public class ROMItems {
     public static BisonSteakItem BISON_STEAK = promise();
 
     public static CommonItemScrapItem COMMON_ITEM_SCRAP = promise();
- //   public static UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP = promise();
+   public static UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP = promise();
 
     public static WeepingFungusItem WEEPING_FUNGUS = promise();
 
@@ -104,7 +105,7 @@ public class ROMItems {
             REGISTER.register("topaz_brooch", TopazBroochItem::new).defaultModel(tl("item/topaz_broosh"));
             REGISTER.register("bison_steak", BisonSteakItem::new).defaultModel(tl("item/bison_steak"));
              REGISTER.register("common_item_scrap", CommonItemScrapItem::new).defaultModel(tl("item/common_item_scrap"));
-         //    REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("item/uncommon_item_scrap"));
+             REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("item/uncommon_item_scrap"));
             REGISTER.register("weeping_fungus", WeepingFungusItem::new).defaultModel(tl("item/weeping_fungus"));
             REGISTER.register("power_elixir", PowerElixirItem::new).defaultModel(tl("item/power_elixir"));
             REGISTER.register("empty_elixir", EmptyElixirItem::new).defaultModel(tl("item/empty_bottle"));

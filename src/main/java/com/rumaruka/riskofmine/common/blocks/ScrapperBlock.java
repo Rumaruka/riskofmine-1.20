@@ -28,6 +28,12 @@ public class ScrapperBlock extends Block {
 
                 return InteractionResult.SUCCESS;
             }
+            if (ROMUtils.isUnCommon(player_)) {
+                ItemEntity itemEntity = new ItemEntity(world_,pos_.getX(),pos_.getY(),pos_.getZ(),new ItemStack(ROMItems.UNCOMMON_ITEM_SCRAP,1));
+                world_.addFreshEntity(itemEntity);
+
+                return InteractionResult.SUCCESS;
+            }
         }
 
 

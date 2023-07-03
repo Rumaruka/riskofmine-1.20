@@ -178,11 +178,59 @@ public class ROMUtils {
         }
         return false;
     }
-    public static boolean isCommon(Player player) {
+    public static boolean isVoid(Player player) {
 
         ItemStack itemStack = player.getMainHandItem();
         if (itemStack.getItem() instanceof BaseCollectablesItem base) {
-            if (base.getType() == Types.COMMON) {
+            if (base.getType() == Types.VOID) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isScrap(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.SCRAP) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isLunar(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.LUNAR) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isLegendary(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.LEGENDARY) {
+                itemStack.shrink(1);
+                return true;
+            }
+
+        }
+        return false;
+    }
+    public static boolean isEq(Player player) {
+
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() instanceof BaseCollectablesItem base) {
+            if (base.getType() == Types.EQUIPMENT) {
                 itemStack.shrink(1);
                 return true;
             }
