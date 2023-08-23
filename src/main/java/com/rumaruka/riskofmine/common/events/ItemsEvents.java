@@ -10,6 +10,7 @@ import com.rumaruka.riskofmine.ntw.ROMNetwork;
 import com.rumaruka.riskofmine.ntw.packets.ItemActivationPacket;
 import com.rumaruka.riskofmine.utils.ROMDoubleEffect;
 import com.rumaruka.riskofmine.utils.ROMMathFormula;
+import com.rumaruka.riskofmine.utils.ROMRandomChanceUtils;
 import com.rumaruka.riskofmine.utils.ROMUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;

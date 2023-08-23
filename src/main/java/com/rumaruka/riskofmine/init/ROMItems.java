@@ -59,7 +59,7 @@ public class ROMItems {
     public static BisonSteakItem BISON_STEAK = promise();
 
     public static CommonItemScrapItem COMMON_ITEM_SCRAP = promise();
-   public static UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP = promise();
+    public static UnCommonItemScrapItem UNCOMMON_ITEM_SCRAP = promise();
 
     public static WeepingFungusItem WEEPING_FUNGUS = promise();
 
@@ -72,6 +72,45 @@ public class ROMItems {
 
     public static LunarCoinItem LUNAR_COIN = promise();
 
+    public static ArrayList<Item> getAllItem() {
+        return (Lists.newArrayList(
+
+                ARMOR_PIERCING_ROUNDS,
+                BUSTLING_FUNGUS,
+                GASOLINE,
+                INFUSION,
+                SHAPED_GLASS,
+                SOLDIER_SYRINGE,
+                MONSTER_TOOTH,
+                CROWBAR,
+                ENERGY_DRINK,
+                BEADS_OF_FEALTY,
+                CHRONOBAUBLE,
+                BLAST_SHOWER,
+                FOCUS_CRYSTAL,
+                DIO_BEST_FRIEND,
+                ALIEN_HEAD,
+                OLD_WAR_STEALTHKIT,
+                TRI_TIP_DAGGER,
+                STUN_GRENADE,
+                WARBANNER,
+                THE_CROWDFUNDER,
+                STICKY_BOMB,
+                TOPAZ_BROOCH,
+                TENTABAUBLE,
+                BISON_STEAK,
+                COMMON_ITEM_SCRAP,
+                UNCOMMON_ITEM_SCRAP,
+                HOPOO_FEATHER,
+                WEEPING_FUNGUS,
+                POWER_ELIXIR,
+                EMPTY_ELIXIR,
+                TOUGHER_TIMES,
+                SAFER_SPACES,
+
+                LUNAR_COIN
+        ));
+    }
 
     private static class Init {
         @AutoRegistrable
@@ -104,8 +143,8 @@ public class ROMItems {
             REGISTER.register("tentabauble", TentabaubleItem::new).defaultModel(tl("item/tentabauble"));
             REGISTER.register("topaz_brooch", TopazBroochItem::new).defaultModel(tl("item/topaz_broosh"));
             REGISTER.register("bison_steak", BisonSteakItem::new).defaultModel(tl("item/bison_steak"));
-             REGISTER.register("common_item_scrap", CommonItemScrapItem::new).defaultModel(tl("item/common_item_scrap"));
-             REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("item/uncommon_item_scrap"));
+            REGISTER.register("common_item_scrap", CommonItemScrapItem::new).defaultModel(tl("item/common_item_scrap"));
+            REGISTER.register("uncommon_item_scrap", UnCommonItemScrapItem::new).defaultModel(tl("item/uncommon_item_scrap"));
             REGISTER.register("weeping_fungus", WeepingFungusItem::new).defaultModel(tl("item/weeping_fungus"));
             REGISTER.register("power_elixir", PowerElixirItem::new).defaultModel(tl("item/power_elixir"));
             REGISTER.register("empty_elixir", EmptyElixirItem::new).defaultModel(tl("item/empty_bottle"));
@@ -119,43 +158,4 @@ public class ROMItems {
         }
     }
 
-    public static ArrayList<Item> getAllItem() {
-        return (Lists.newArrayList(
-
-                ARMOR_PIERCING_ROUNDS,
-                BUSTLING_FUNGUS,
-                GASOLINE,
-                INFUSION,
-                SHAPED_GLASS,
-                SOLDIER_SYRINGE,
-                MONSTER_TOOTH,
-                CROWBAR,
-                ENERGY_DRINK,
-                BEADS_OF_FEALTY,
-                CHRONOBAUBLE,
-                BLAST_SHOWER,
-                FOCUS_CRYSTAL,
-                DIO_BEST_FRIEND,
-                ALIEN_HEAD,
-                OLD_WAR_STEALTHKIT,
-                TRI_TIP_DAGGER,
-                STUN_GRENADE,
-                WARBANNER,
-                THE_CROWDFUNDER,
-                STICKY_BOMB,
-                TOPAZ_BROOCH,
-                TENTABAUBLE,
-                BISON_STEAK,
-                 COMMON_ITEM_SCRAP,
-               //   UNCOMMON_ITEM_SCRAP,
-                HOPOO_FEATHER,
-                WEEPING_FUNGUS,
-                POWER_ELIXIR,
-                EMPTY_ELIXIR,
-                TOUGHER_TIMES,
-                SAFER_SPACES,
-
-                LUNAR_COIN
-        ));
-    }
 }

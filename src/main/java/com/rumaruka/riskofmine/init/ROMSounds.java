@@ -27,4 +27,7 @@ public class ROMSounds {
             () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.player.feather_1")));
     public static final RegistryObject<SoundEvent> ROM_PLAYER_LEVEL_UP = REGISTER.register("riskofmine.player.level_up",
             () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.player.level_up")));
+
+    public static final RegistryObject<SoundEvent> ROM_SCRAPPER_WORK = REGISTER.register("riskofmine.proc.scrapper",
+            () -> SoundEvent.createVariableRangeEvent(rl("riskofmine.proc.scrapper")));
 }

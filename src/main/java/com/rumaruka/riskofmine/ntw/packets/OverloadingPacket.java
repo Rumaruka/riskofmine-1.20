@@ -26,7 +26,7 @@ public record OverloadingPacket(int entityId, boolean overloading) {
         ctx.get().enqueueWork(() -> {
 
 
-            Entity entity = ROMUtils.getMc().level.getEntity(entityId);
+            Entity entity = ROMUtils.getLvL().getEntity(entityId);
 
             if (entity instanceof IOverloading over) {
                 over.setOverloading(overloading);

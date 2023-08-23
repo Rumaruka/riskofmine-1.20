@@ -38,7 +38,7 @@ public class ROMUtils {
     }
 
     public static Level getLvL() {
-        return mc.level;
+        return getMc().level;
     }
 
     public static LevelRenderer getRender() {
@@ -182,10 +182,7 @@ public class ROMUtils {
 
         ItemStack itemStack = player.getMainHandItem();
         if (itemStack.getItem() instanceof BaseCollectablesItem base) {
-            if (base.getType() == Types.VOID) {
-                itemStack.shrink(1);
-                return true;
-            }
+            return base.getType() == Types.VOID;
 
         }
         return false;
@@ -194,10 +191,7 @@ public class ROMUtils {
 
         ItemStack itemStack = player.getMainHandItem();
         if (itemStack.getItem() instanceof BaseCollectablesItem base) {
-            if (base.getType() == Types.SCRAP) {
-                itemStack.shrink(1);
-                return true;
-            }
+            return base.getType() == Types.SCRAP;
 
         }
         return false;
@@ -206,10 +200,7 @@ public class ROMUtils {
 
         ItemStack itemStack = player.getMainHandItem();
         if (itemStack.getItem() instanceof BaseCollectablesItem base) {
-            if (base.getType() == Types.LUNAR) {
-                itemStack.shrink(1);
-                return true;
-            }
+            return base.getType() == Types.LUNAR;
 
         }
         return false;
@@ -255,10 +246,6 @@ public class ROMUtils {
         return false;
     }
 
-    @Deprecated
-    private ExplosionDamageCalculator makeNewEDC(Entity entity) {
-        return new EntityBasedExplosionDamageCalculator(entity);
-    }
 
     public static void replaceItem(ItemStack used, ItemStack scrap) {
         used.shrink(1);
